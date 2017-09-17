@@ -1,0 +1,382 @@
+#header
+    @extend $block
+    background: white
+    position: relative
+    a, a:visited
+        white-space: nowrap
+        transition: 0.2s ease
+        color: color-default
+    a:hover
+        color: color-link
+
+$header-block
+    height: logo-height
+    line-height: logo-height
+    padding: ((header-height - logo-height)/2) 15px
+
+$header-block-left
+    float: left
+
+$header-block-right
+    float: right
+
+.header-inner
+    height: 100%
+    position: relative
+    #logo
+        @extend $header-block
+        @extend $header-block-left
+        display: inline-block
+        .logo
+            margin-right: 5px
+            display: inline-block
+        .site-title
+            font-size: 16px
+            display: inline-block
+            vertical-align: top
+            font-weight: 600
+        .manman-logo
+            width: 32px;
+            height: 32px;
+            border-radius: 5.88px;
+            display: block;
+            background-color: #38b7ea;
+            float: left;
+            margin: 4px 10px 4px 0;
+            position: relative;
+            opacity: 0;
+            animation-duration: 0.75s;
+            animation-delay: 0.5s;
+            animation-name: bounceIn;
+            animation-fill-mode: forwards;
+        .manman-logo-left:before
+        .manman-logo-left:after
+            content: "";
+            background-color: #fff;
+            display: block;
+            position: absolute;
+            border-radius: 1.5px;
+        .manman-logo-left:before
+            animation-duration: 0.5s;
+            animation-delay: 0.65s;
+            animation-fill-mode: both;
+            animation-name: logoLeftUp;
+        .manman-logo-left:after
+            animation-duration: 0.5s;
+            animation-delay: 0.65s;
+            animation-fill-mode: both;
+            animation-name: logoLeftDown;
+        .manman-logo-mid
+            width: 3px;
+            height: 14px;
+            position: absolute;
+            border-radius: 1.5px;
+            top: 50%;
+            left: 50%;
+            margin-top: -7px;
+            margin-left: -1.5px;
+            transform: rotate(10deg);
+            display: block;
+            background-color: #fff;
+        .manman-logo-right:before
+        .manman-logo-right:after
+            content: "";
+            background-color: #fff;
+            display: block;
+            position: absolute;
+            border-radius: 1.5px;
+        .manman-logo-right:before
+            animation-duration: 0.5s;
+            animation-delay: 0.65s;
+            animation-fill-mode: both;
+            animation-name: logoRightUp;
+        .manman-logo-right:after
+            animation-duration: 0.5s;
+            animation-delay: 0.65s;
+            animation-fill-mode: both;
+            animation-name: logoRightDown;
+
+#header-title
+    text-align: center
+    height: logo-height
+    position: absolute
+    top: 50%
+    left: 0
+    margin-top: logo-height * -0.5
+
+.header-sub
+    border-top: 1px solid color-border
+    ul
+        clearfix()
+        margin: 0 15px
+        li
+            float: left
+            margin: 0 10px
+            a
+                display: inline-block
+                line-height: header-sub-height
+    .main-nav-link
+        display: inline-block
+        line-height: header-sub-height
+
+#header-sub
+    @media mq-mobile
+        display: none
+    @media mq-mini
+        display: none
+
+#main-nav
+    @extend $header-block
+    @extend $header-block-left
+    @media mq-mobile
+        display: none
+    @media mq-mini
+        display: none
+
+#main-nav-mobile
+    @media mq-tablet
+        display: none
+    @media mq-normal
+        display: none
+
+
+$nav-link
+    float: left
+    display: block
+    padding: 0 15px
+
+.nav-icon
+    @extend $nav-link
+    text-align: center
+    font-size: font-size
+    width: font-size
+    height: font-size
+    position: relative
+    cursor: pointer
+    height: logo-height !important
+    line-height: logo-height !important
+
+.main-nav-link
+    @extend $nav-link
+    font-weight: 300
+
+#sub-nav
+    @media mq-normal
+        display: none
+    @extend $header-block
+    @extend $header-block-right
+    #profile-nav
+        #profile-anchor
+            clearfix()
+            display: block
+            height: logo-height
+            line-height: logo-height
+        .avatar, .fa
+            float: left
+        .avatar
+            width: logo-height
+            height: logo-height
+            margin-right: 8px
+        .fa
+            line-height: logo-height
+
+#search-form-wrap
+    @media mq-mini
+        display: none
+    @extend $header-block
+    @extend $header-block-right
+    .search-form
+        position: relative
+        .search-form-input
+            width: 100%
+            padding: 0 30px 0 15px
+            line-height: logo-height
+            height: logo-height !important
+            border-radius: ((logo-height + 2)/2)
+            &::-webkit-search-results-decoration
+            &::-webkit-search-cancel-button
+                -webkit-appearance: none
+        .search-form-submit
+            top: 50%
+            right: 15px
+            border: none
+            cursor: pointer
+            margin-top: -7px
+            background: none
+            position: absolute
+            font: 13px font-icon
+            font-family: 'FontAwesome'
+            &:before
+                content: '\f002'
+            &:hover, &:focus
+                color: #777
+
+.search-form-input,
+.search-form-input.ins-search-input,
+.search-form-input.st-ui-search-input,
+.search-form-input.st-default-search-input
+    -webkit-appearance: textarea
+    appearance: textarea
+    padding: 0
+    width: 200px
+    box-shadow: none
+    color: color-default
+    transition: 0.2s ease
+    box-sizing: border-box
+    height: auto !important
+    line-height: line-height
+    outline: none !important
+    background: none !important
+    font: font-size font-sans
+    border: 1px solid color-border !important
+    &:focus
+        border-color: color-link !important
+    &::-webkit-search-results-decoration
+    &::-webkit-search-cancel-button
+        -webkit-appearance: none
+
+#main-nav-mobile
+    overflow-y: hidden
+    overflow-x: auto
+    .menu
+        clearfix()
+        margin: 0
+        height: header-sub-height
+        .search-form-input
+            display: none
+            @media mq-mini
+                display: block
+            padding: 0 10px
+            margin-right: 15px
+            height: header-sub-height - 16
+            line-height: header-sub-height - 16
+            border-radius: ((header-sub-height - 16)/2)
+            &::-webkit-search-results-decoration
+            &::-webkit-search-cancel-button
+                -webkit-appearance: none
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    0% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+    80% {
+        transform: scale3d(0.97, 0.97, 0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+@keyframes logoLeftDown {
+    from, to {
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+        from {
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        left: 50%;
+        margin-top: -1.5px;
+        margin-left: -1.5px;
+        opacity: 0;
+    }
+    to {
+        width: 8px;
+        height: 3px;
+        top: 50%;
+        left: 3px;
+        margin-top: -1.5px;
+        margin-left: 0;
+        transform: rotate(30deg);
+        transform-origin: 0 50%;
+        opacity: 1;
+    }
+}
+@keyframes logoLeftUp {
+    from, to {
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+        from {
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        left: 50%;
+        margin-top: -1.5px;
+        margin-left: -1.5px;
+        opacity: 0;
+    }
+    to {
+        width: 8px;
+        height: 3px;
+        top: 50%;
+        left: 3px;
+        margin-top: -1.5px;
+        margin-left: 0;
+        transform: rotate(-30deg);
+        transform-origin: 0 50%;
+        opacity: 1;
+    }
+}
+@keyframes logoRightDown {
+    from, to {
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    from {
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        right: 50%;
+        margin-top: -1.5px;
+        margin-left: -1.5px;
+        opacity: 0;
+    }
+    to {
+        width: 8px;
+        height: 3px;
+        top: 50%;
+        right: 3px;
+        margin-top: -1.5px;
+        margin-left: 0;
+        transform: rotate(30deg);
+        transform-origin: 100% 50%;
+        opacity: 1;
+    }
+}
+@keyframes logoRightUp {
+    from, to {
+        animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    from {
+        width: 3px;
+        height: 3px;
+        top: 50%;
+        right: 50%;
+        margin-top: -1.5px;
+        margin-left: -1.5px;
+        opacity: 0;
+    }
+    to {
+        width: 8px;
+        height: 3px;
+        top: 50%;
+        right: 3px;
+        margin-top: -1.5px;
+        margin-left: 0;
+        transform: rotate(-30deg);
+        transform-origin: 100% 50%;
+        opacity: 1;
+    }
+}
