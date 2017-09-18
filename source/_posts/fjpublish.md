@@ -13,7 +13,7 @@ fjpublish是一款让你通过配置文件就能完成发布项目到各个环�
 
 ## 前言
 
-曾几何时，我相信部分前端开发人员（包括我）使用的项目发布方式还活着刀耕火种的年代（使用xftp或者sublime text的插件sftp等），发布方式简单又粗暴，想发布哪个目录就直接上传覆盖...
+曾几何时，我相信部分Web Developer（包括我）使用的项目发布方式还活着刀耕火种的年代（使用xftp或者sublime text的插件sftp等），发布方式简单又粗暴，想发布哪个目录就直接上传覆盖...
 
 但是这种方式对于现在的前端项目有很多弊端：
 
@@ -40,7 +40,6 @@ fjpublish是一款让你通过配置文件就能完成发布项目到各个环�
 * 完备的提醒功能，若未配置或者配置错误某些重要或必要的配置则终止该发布流程并给出提示；
 * [开发计划] 在发布流程中加入自动git流程和cdn文件上传功能；
 * [开发计划] 可通过命令选择还原远程文件为某个Git文件版本或者时间版本；
-* [开发计划] 远程命令增加钩子，精确控制每一个远程命令；
 * [开发计划] 可单独使用命令执行某个中间件流程或中间件衍生的方法。
 
 事实上，fjpublish是一个由核心实例加上各种中间件函数组成的，类似于'express'的概念，以上的功能部分是由官方编写的中间件完成，所以，理论上功能的多少，完全取决于搭配的中间件。
@@ -244,6 +243,19 @@ localPathIgnore: '**/*.map'
 * **shellTrashPath**: (String)
 当module的`nobackup`设置为true时，fjpublish进行软删除的后文件的放置地址，当自定义时必须是一个二级及以上的绝对目录路径，例如：'/abc/cde'， 默认为**'/tmp/fjpublishTrashDir'**。
 
+* **ssh2shell**: (Object)
+fjpublish使用[ss2shell](https://github.com/cmp-202/ssh2shell)库来完成远程命令的操作，且默认情况下每一个命令都没有做异常判断，只是按顺序执行，通常这没有什么问题，如果你需要对每一个命令进行控制，请参考ss2shell的文档进行进程管理。
+注意，这个字段请传ss2shell可配置的字段中除了server，commands以外的剩余字段。
+```
+ssh2shell: {
+    onCommandComplete: function(command, response, sshObj) {
+        if (command === 'cd /xxx/xxx/xxx') {
+            process.exit(1);
+        };
+    }
+},
+```
+
 * **tag**: (String|Function)
 发布时进行备份旧文件时的备份后缀，默认为当前时间戳。
 
@@ -295,6 +307,9 @@ fjpublish默认使用的是串行完成每一个任务，也可以设置该项�
 
 * **check**: (Boolean)
 配置该项为**true**可跳过每一个中间件的文件操作环节，通常用于快速检查参数是否配置正确，该选项依赖于每一个中间件是否遵守这个规则。
+
+* **checkUpdate**: (Boolean)
+是否在发布任务完成后检查fjpublish是否有更新的版本，默认为**true**，进行检查。
 
 * **usePrompt**: (Boolean)
 配置该项为**true**则使用提示器的方式进行发布。
@@ -423,7 +438,7 @@ Fjpublish(config, ['test', {env: 'public', nomerge: true}]).use(prompt)
 
 ## 后记
 fjpublish核心的功能都已经实现，并在公司内部项目中运行了大半年，也在计划着完成剩余的开发计划，如果你有什么好的idea，请在留言区留言或在github上开issue。
-再次感谢能有耐心看到这里的各位大哥:)
+再次感谢能有耐心看到这里的各位大哥，觉得不错的给个star呗:)
 
 
 
