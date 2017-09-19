@@ -8,7 +8,7 @@ date: 2017/09/09 12:00:00
 excerpt_separator: <!--more-->
 ---
 
-fjpublish是一款让你通过配置文件就能完成发布项目到各个环境的基于node的命令行工具，它有着丰富的API，意在创建可靠舒适的发布项目体验，同时它也有很强大的可拓展能力，让你轻松定制属于自己的发布流程。
+[fjpublish](https://github.com/zczhangchao51/fjpublish)是一款让你通过配置文件就能完成发布项目到各个环境的基于node的命令行工具，它有着丰富的API，意在创建可靠舒适的发布项目体验，同时它也有很强大的可拓展能力，让你轻松定制属于自己的发布流程。
 <!--more-->
 
 ## 前言
@@ -128,19 +128,19 @@ fjpublish命令行的实现依赖[commander](https://github.com/tj/commander)库
 列出当前配置文件中配置的发布的环境
 
 * **publish env &lt;env&gt; [options]**
-选择发布至配置好的某环境，env参数必填
+选择发布至配置好的某些环境，env参数必填，env参数可以多选，以逗号分隔，例如： **fjpublish env test,public**
 
   `-h, --help`
   获得**fjpublish env**的帮助。
 
   `--nobuild [env]`
-  等同于为module设置了nobuild=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
+  等同于为每一个module设置了nobuild=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
 
   `--nobackup [env]`
-  等同于为module设置了nobackup=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
+  等同于为每一个module设置了nobackup=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
 
   `--nomerge [env]`
-  等同于为module设置了nomerge=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
+  等同于为每一个module设置了nomerge=true，若module已存在该值，则覆盖。若配置env参数（可多选，英文逗号分隔），则只对env参数对应的环境设置值
 
   `--check`
   等同于为config设置了check=true
@@ -206,7 +206,7 @@ ssh: {
 fjpublish会根据该选项结合[npm script](http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html)执行构建命令。
 例如，配置`buildCommand`为'build'则构建命令为`npm run build`
 
-* **nobuild**: (String)
+* **nobuild**: (Boolean)
 若项目没有需要构建的需求或发布时已经不需要构建则设置该项为true, 默认需要构建。
 
 * **localPath**: (String)
@@ -259,30 +259,30 @@ ssh2shell: {
 * **tag**: (String|Function)
 发布时进行备份旧文件时的备份后缀，默认为当前时间戳。
 
-* **extractVerbose**: (String)
-发布时进行解压操作时是否显示解压文件，默认不显示。
+* **extractVerbose**: (Boolean)
+设置为true则发布时进行解压操作时显示解压文件，默认不显示。
 
 * **preCommands**: (String|Array)
 远程fjpublish内部命令执行前的命令。
 
-* **postCommands**: (String)
+* **postCommands**: (String|Array)
 远程fjpublish内部命令执行后即远程项目文件替换后执行的linux命令，例如，重启pm2服务器：
 ```
 postCommands: ['pm2 restart']
 ```
 
-* **nobackup**: (String)
+* **nobackup**: (Boolean)
 发布时是否备份旧文件。默认进行备份，备份方式为例如abc文件将被备份为abc.{时间戳}（若`tag`字段存在则后缀为对应字段）。
 若选择不备份，fjpublish为了安全起见是进行软删除， 即使用mv命名移动至`shellTrashPath`设置的目录，默认为**'/tmp/fjpublishTrashDir'**，例如备份/www/test/abc，则将其移动至/tmp/fjpublishTrashDir/www.test.abc.{时间戳} 。
 
-* **nomerge**: (String)
+* **nomerge**: (Boolean)
 发布时默认的备份方式是移除旧文件然后放入新文件，但是如果项目使用webpack之类的自动将文件加上hash，则替换后正在使用网站的人会出现找不到文件的错误。
 该选项就是为了解决这个问题，旧文件夹移除并将新文件夹与旧文件夹合并。
 该选项默认为不进行合并。
 
 * **prompt**: (Object|Array)
 fjpublish使用的提示器为[Inquirer](https://github.com/SBoudrias/Inquirer.js)，fjpublish会将`prompt`数组原封不动的传给**Inquirer**来生成提示器。
-配置提示器可以通过命令行的方式获取module所需的参数，在module中配置的提示器只会影响该module，在config配置的提示器会影响metadata或也可配置影响每一个module。
+配置提示器可以通过命令行的方式获取module所需的参数，在module中配置的提示器只会影响该module，在config配置的提示器会影响metadata，或也可配置影响每一个module。
 提示器只会在**prompt**中间件中进行一次性询问，一次性收集在config中定义的prompt及每一个发布的module的prompt。
 
 * **promptIgnore**： (String|Array)
@@ -293,7 +293,7 @@ fjpublish使用的提示器为[Inquirer](https://github.com/SBoudrias/Inquirer.j
 * **prompt**: (String)
 配置方式参考module中的`prompt`配置，区别在于config中的`prompt`默认只为metadata赋值。
 
-* **promptSyncModule**: (String)
+* **promptSyncModule**: (String|Array)
 由于希望完成提示一次即可为每一个module赋值的需求，所以需要通过该项决定在config中配置的`prompt`哪一项需要同步到每一个module。
 
 * **promptIgnore**： (String|Array)
@@ -361,7 +361,7 @@ completeHook(fjpublish, result) {
 fjpublish的基本使用方式在上面已介绍完毕，如果不需要更多的功能则后面的内容可忽略。
 从本小节开始介绍如何编写一个fjpublish中间件以及如何函数式的进行发布。
 
-####Fjpublish函数api
+#### Fjpublish函数api
 * **Fjpublish**: (config:Object, [opt: String|Array])
 核心构造函数，`config`参数必传，配置等同于上文的`config`。
 `opt`参数非必须，含义为选择要发布的环境，若忽略该参数，则`config`配置的`modules`都将作为要发布的环境。
@@ -393,7 +393,7 @@ fjpublish的基本使用方式在上面已介绍完毕，如果不需要更多�
 * **Fjpublish.prototype.start**:
 启动fjpublish，必须显式的调用start方法才会真正执行任务。
 
-####编写一个中间件
+#### 编写一个中间件
 fjpublish基于[async](https://github.com/caolan/async)完成任务执行的功能。编写一个中间件注意以下几点即可：
 * 确保输出一个具名函数(匿名函数会导致钩子函数无法匹配这个中间件)，并且确保这个函数在各种操作后调用next方法即可。
 * 函数可借助Fjpublish的静态方法完成一些辅助功能，尤其建议使用`Fjpublish.logger`，这样会让输出更统一。
@@ -414,7 +414,7 @@ module.exports = function builder(module, env, next) {
 }
 ```
 
-####函数式发布
+#### 函数式发布
 在了解Fjpublish的api以及编写一个中间件后，那么进行函数式发布就非常简单了：
 ```
 const Fjpublish = require('Fjpublish');
@@ -433,12 +433,12 @@ Fjpublish(config, ['test', {env: 'public', nomerge: true}]).use(prompt)
     .start()
 ```
 
-####编写自定义的发布命令
+#### 编写自定义的发布命令
 有了以上的知识，编写一个自定义的命令也是非常简单的，推荐你[这篇文章](http://www.open-open.com/lib/view/open1450339482282.html)
 
 ## 后记
 fjpublish核心的功能都已经实现，并在公司内部项目中运行了大半年，也在计划着完成剩余的开发计划，如果你有什么好的idea，请在留言区留言或在github上开issue。
-再次感谢能有耐心看到这里的各位大哥，觉得不错的给个star呗:)
+再次感谢能有耐心看到这里的各位大哥，觉得不错的给个[star](https://github.com/zczhangchao51/fjpublish)呗:)
 
 
 
