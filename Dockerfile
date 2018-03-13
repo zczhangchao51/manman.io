@@ -4,7 +4,7 @@ COPY ./package.json /app/
 COPY ./package-lock.json /app/
 RUN npm install --registry=https://registry.npm.taobao.org
 COPY . /app/
-RUN npm run build
+RUN npm run generate
 
 FROM nginx:1.13-alpine
 COPY --from=build /app/public /usr/share/nginx/html
