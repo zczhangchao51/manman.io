@@ -6,7 +6,7 @@ RUN npm install --registry=https://registry.npm.taobao.org
 COPY . /app/
 RUN npm run generate
 
-FROM nginx:1.13-alpine
+FROM nginx:latest
 COPY --from=build /app/public /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx","-g","daemon off;"]
