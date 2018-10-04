@@ -1,4 +1,4 @@
-title: fjpublish文档1
+title: fjpublish文档 测试CI/CD
 categories: doc
 tags:
 - fjpublsh
