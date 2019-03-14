@@ -73,3 +73,28 @@ theme: icarus
 deploy:
   type: git
   repo: git@github.com:zczhangchao51/zczhangchao51.github.io.git
+
+# Comment
+comment:
+  disqus: # enter disqus shortname here
+  duoshuo: # enter duoshuo shortname here
+  youyan: #2118939
+  facebook: # enter true to enable
+  isso: # enter the domain name of your own comment isso server eg. comments.example.com
+  changyan: # please fill in `appid` and `conf` to enable
+    appid:
+    conf:
+  gitment:
+    owner: zczhangchao51
+    repo: blog
+    #Register an OAuth application, and you will get a client ID and a client secret.
+    client_id: 10a802ddc8242ee946d8
+    client_secret: 1e5799af73e1d513721c6dceade624df1ec76e9c
+  livere: # enter livere uid here
+  valine: # Valine Comment System https://github.com/xCss/Valine
+    on: # enter true to enable
+    appId: # enter the leancloud application appId here
+    appKey: # enter the leancloud application appKey here
+    notify: # enter true to enable <Mail notifier> https://github.com/xCss/Valine/wiki/Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E9%82%AE%E4%BB%B6%E6%8F%90%E9%86%92%E8%AE%BE%E7%BD%AE
+    verify: # enter true to enable <Validation code>
+    placeholder: Just Do It # enter the comment box placeholder
