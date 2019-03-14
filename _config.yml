@@ -86,7 +86,7 @@ comment:
     conf:
   gitment:
     owner: zczhangchao51
-    repo: blog
+    repo: manman.io
     #Register an OAuth application, and you will get a client ID and a client secret.
     client_id: 10a802ddc8242ee946d8
     client_secret: 1e5799af73e1d513721c6dceade624df1ec76e9c
